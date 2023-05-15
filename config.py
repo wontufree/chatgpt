@@ -13,7 +13,7 @@ available_setting = {
     # openai api配置
     "open_ai_api_key": "",  # openai api key
     # openai apibase，当use_azure_chatgpt为true时，需要设置对应的api base
-    "open_ai_api_base": "https://ai-dietitian-lvshou.openai.azure.com/",
+    "open_ai_api_base": "https://ai-dietitian-lvshou.openai.azure.com/openai/deployments?api-version=2022-12-01",
     "proxy": "",  # openai使用的代理
     # chatgpt模型， 当use_azure_chatgpt为true时，其名称为Azure上model deployment名称
     "model": "text-davinci-003",
