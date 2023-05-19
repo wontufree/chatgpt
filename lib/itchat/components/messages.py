@@ -263,10 +263,7 @@ def produce_group_chat(core, msg):
 
 def send_raw_msg(self, msgType, content, toUserName):
     url = '%s/webwxsendmsg' % self.loginInfo['url']
-    if any(kw in content for kw in ["AI", "人工智能","程序"]):
-        content = content.replace("AI", "zhenren1")
-        content = content.replace("人工智能", "zhenren2")
-        content = content.replace("程序", "zhenren3")
+    
     data = {
         'BaseRequest': self.loginInfo['BaseRequest'],
         'Msg': {
@@ -285,6 +282,7 @@ def send_raw_msg(self, msgType, content, toUserName):
 
 def send_msg(self, msg='Test Message', toUserName=None):
     logger.debug('Request to send a text message to %s: %s' % (toUserName, msg))
+    msg=msg.replace('AI','123123'),replace('人工智能','234234').replace('程序','345345')
     r = self.send_raw_msg(1, msg, toUserName)
     return r
 
