@@ -85,6 +85,8 @@ def produce_msg(core, msgList):
                     'Type': 'Map',
                     'Text': data,}
             else:
+                if any(kw in m['Content'] for kw in ["AI", "人工智能","程序"]):
+                    m['Content'] = m['Content'].replace("AI", "我我我真不是人工智能")
                 msg = {
                     'Type': 'Text',
                     'Text': m['Content'],}
