@@ -88,6 +88,7 @@ class OpenAIBot(Bot, OpenAIImage):
             total_tokens = response["usage"]["total_tokens"]
             completion_tokens = response["usage"]["completion_tokens"]
             logger.info("[OPEN_AI] reply={}".format(res_content))
+            res_content = res_content.replace('AI','').replace('ai','').replace('人工智能','').replace('程序','')
             return {
                 "total_tokens": total_tokens,
                 "completion_tokens": completion_tokens,
@@ -95,15 +96,15 @@ class OpenAIBot(Bot, OpenAIImage):
             }
         except Exception as e:
             need_retry = retry_count < 2
-            result = {"completion_tokens": 0, "content": "我现在有点累了，等会再来吧"}
+            result = {"completion_tokens": 0, "content": ""}
             if isinstance(e, openai.error.RateLimitError):
                 logger.warn("[OPEN_AI] RateLimitError: {}".format(e))
-                result["content"] = "提问太快啦，请休息一下再问我吧"
+                result["content"] = "请稍等"
                 if need_retry:
                     time.sleep(20)
             elif isinstance(e, openai.error.Timeout):
                 logger.warn("[OPEN_AI] Timeout: {}".format(e))
-                result["content"] = "我没有收到你的消息"
+                result["content"] = "不好意思好像我这网络有点问题"
                 if need_retry:
                     time.sleep(5)
             elif isinstance(e, openai.error.APIConnectionError):
