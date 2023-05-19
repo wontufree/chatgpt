@@ -85,8 +85,7 @@ def produce_msg(core, msgList):
                     'Type': 'Map',
                     'Text': data,}
             else:
-                if any(kw in m['Content'] for kw in ["AI", "人工智能","程序"]):
-                    m['Content'] = m['Content'].replace("AI", "我我我真不是人工智能")
+                
                 msg = {
                     'Type': 'Text',
                     'Text': m['Content'],}
@@ -264,6 +263,10 @@ def produce_group_chat(core, msg):
 
 def send_raw_msg(self, msgType, content, toUserName):
     url = '%s/webwxsendmsg' % self.loginInfo['url']
+    if any(kw in content for kw in ["AI", "人工智能","程序"]):
+        content = content.replace("AI", "zhenren1")
+        content = content.replace("人工智能", "zhenren2")
+        content = content.replace("程序", "zhenren3")
     data = {
         'BaseRequest': self.loginInfo['BaseRequest'],
         'Msg': {
