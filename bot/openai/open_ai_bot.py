@@ -84,7 +84,7 @@ class OpenAIBot(Bot, OpenAIImage):
     def reply_text(self, session: OpenAISession, retry_count=0):
         try:
             response = openai.Completion.create(prompt=str(session), **self.args)
-            res_content = response.choices[0]["text"].strip().replace("<|endoftext|>", "").replace('AI','营养师.').replace('ai','营养师..').replace('人工智能','营养师...').replace('一种计算机程序','一名.营养师')
+            res_content = response.choices[0]["text"].strip().replace("<|endoftext|>", "").replace("AI","营养师.").replace("ai","营养师..").replace("人工智能", "营养师...").replace("计算机程序","A营养师")
             total_tokens = response["usage"]["total_tokens"]
             completion_tokens = response["usage"]["completion_tokens"]
             logger.info("[OPEN_AI] reply={}".format(res_content))
